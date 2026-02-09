@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SL Guide - Discover Sri Lanka</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --ocean-blue: #006994;
+            --tropical-green: #2E8B57;
+            --golden-sand: #F4A460;
+            --sunset-orange: #FF6B35;
+            --white: #ffffff;
+            --dark: #1a1a1a;
+            --glass: rgba(255, 255, 255, 0.95);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            background: #f5f5f5;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        .navbar.scrolled {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            padding: 0.8rem 5%;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .navbar.scrolled .logo {
+            color: var(--ocean-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .navbar.scrolled .nav-links a {
+            color: var(--dark);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--sunset-orange);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--white);
+        }
+
+        .navbar.scrolled .mobile-menu {
+            color: var(--dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(0,105,148,0.7), rgba(46,139,87,0.7)), 
+                        url('https://images.unsplash.com/photo-1588258525935-3e5c8e5f6c9a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            animation: fadeInUp 1s ease;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--sunset-orange);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255,107,53,0.4);
+            animation: fadeInUp 1s ease 0.6s both;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255,107,53,0.6);
+            background: #ff8555;
+        }
+
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f5f5f5' fill-opacity='1' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--ocean-blue);
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--sunset-orange);
+            border-radius: 2px;
+        }
+
+        /* Places Grid */
+        .places-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .place-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .place-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .place-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .place-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .place-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+        }
+
+        .place-name {
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .place-content {
+            padding: 1.5rem;
+        }
+
+        .place-description {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .place-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .distance {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--tropical-green);
+            font-weight: 600;
+        }
+
+        .btn-map {
+            background: var(--ocean-blue);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-map:hover {
+            background: var(--sunset-orange);
+        }
+
+        .btn-details {
+            width: 100%;
+            padding: 0.8rem;
+            background: transparent;
+            border: 2px solid var(--ocean-blue);
+            color: var(--ocean-blue);
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .btn-details:hover {
+            background: var(--ocean-blue);
+            color: var(--white);
+        }
+
+        /* Map Section */
+        .map-container {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        #map {
+            height: 600px;
+            width: 100%;
+            filter: grayscale(20%);
+        }
+
+        .map-info-panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            max-width: 300px;
+            display: none;
+            animation: slideIn 0.3s ease;
+            z-index: 10;
+        }
+
+        .map-info-panel.active {
+            display: block;
+        }
+
+        .map-info-panel h3 {
+            color: var(--ocean-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .map-info-panel p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .close-panel {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        /* Login Section */
+        .login-container {
+            max-width: 450px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--ocean-blue), var(--tropical-green), var(--sunset-orange));
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header h2 {
+            color: var(--ocean-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--ocean-blue);
+        }
+
+        .form-group label {
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            color: #999;
+            transition: all 0.3s;
+            pointer-events: none;
+            background: var(--white);
+            padding: 0 0.3rem;
+        }
+
+        .form-group input:focus + label,
+        .form-group input:not(:placeholder-shown) + label {
+            top: -0.6rem;
+            font-size: 0.85rem;
+            color: var(--ocean-blue);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--ocean-blue), var(--tropical-green));
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,105,148,0.4);
+        }
+
+        .welcome-message {
+            text-align: center;
+            padding: 2rem;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .welcome-message i {
+            font-size: 4rem;
+            color: var(--tropical-green);
+            margin-bottom: 1rem;
+        }
+
+        .welcome-message h3 {
+            color: var(--ocean-blue);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Modal for Place Details */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--white);
+            border-radius: 20px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalIn 0.3s ease;
+        }
+
+        .modal-header {
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .modal-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+        }
+
+        .modal-title {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            color: var(--white);
+            font-size: 2.5rem;
+            z-index: 2;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(255,255,255,0.2);
+            color: var(--white);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 3;
+            border: none;
+            font-size: 1.2rem;
+        }
+
+        .close-modal:hover {
+            background: rgba(255,255,255,0.4);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-item {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--sunset-orange);
+        }
+
+        .info-item h4 {
+            color: var(--ocean-blue);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-item p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .tips-section {
+            background: linear-gradient(135deg, #e8f5e9, #e3f2fd);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-top: 1.5rem;
+        }
+
+        .tips-section h4 {
+            color: var(--tropical-green);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tips-list {
+            list-style: none;
+        }
+
+        .tips-list li {
+            padding: 0.5rem 0;
+            color: #555;
+            display: flex;
+            align-items: start;
+            gap: 0.5rem;
+        }
+
+        .tips-list li::before {
+            content: '✓';
+            color: var(--tropical-green);
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: all 0.3s;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .social-links a:hover {
+            background: var(--sunset-orange);
+            transform: translateY(-3px);
+        }
+
+        .footer-message {
+            font-size: 1.2rem;
+            color: var(--golden-sand);
+            margin-top: 1rem;
+            font-weight: 600;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--white);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 2rem;
+                transition: right 0.3s;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                color: var(--dark) !important;
+                font-size: 1.2rem;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .places-grid {
+                grid-template-columns: 1fr;
+            }
+
+            #map {
+                height: 400px;
+            }
+
+            .map-info-panel {
+                position: relative;
+                top: auto;
+                right: auto;
+                max-width: 100%;
+                margin-top: 1rem;
+                box-shadow: none;
+                border: 1px solid #eee;
+            }
+
+            .modal-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-circle {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--ocean-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-circle"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="logo">
+            <i class="fas fa-compass"></i>
+            SL Guide
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home" onclick="closeMenu()">Home</a></li>
+            <li><a href="#places" onclick="closeMenu()">Places</a></li>
+            <li><a href="#map" onclick="closeMenu()">Map</a></li>
+            <li><a href="#login" onclick="closeMenu()">Login</a></li>
+            <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+        </ul>
+        <div class="mobile-menu" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Discover the Beauty of Sri Lanka</h1>
+            <p>Your ultimate guide to paradise on Earth</p>
+            <a href="#places" class="btn-primary">Explore Places</a>
+        </div>
+        <div class="wave"></div>
+    </section>
+
+    <!-- Places Section -->
+    <section id="places">
+        <h2 class="section-title">Popular Destinations</h2>
+        <div class="places-grid" id="placesGrid">
+            <!-- Places will be dynamically inserted here -->
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section id="map">
+        <h2 class="section-title">Interactive Map</h2>
+        <div class="map-container">
+            <iframe 
+                id="map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4047240.53830327!2d78.06306875!3d7.5554942!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2593cf65a1e9d%3A0xe13da4b400e2d38c!2sSri%20Lanka!5e0!3m2!1sen!2sus!4v1699999999999!5m2!1sen!2sus"
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+            <div class="map-info-panel" id="mapInfoPanel">
+                <span class="close-panel" onclick="closeMapPanel()"><i class="fas fa-times"></i></span>
+                <h3 id="panelTitle">Place Name</h3>
+                <p id="panelDescription">Description goes here</p>
+                <p><strong>Distance from Colombo:</strong> <span id="panelDistance">0 km</span></p>
+                <p><strong>Travel Tip:</strong> <span id="panelTip">Tip goes here</span></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Section -->
+    <section id="login">
+        <h2 class="section-title">Traveler Login</h2>
+        <div class="login-container">
+            <div id="loginForm">
+                <div class="login-header">
+                    <h2>Welcome Back</h2>
+                    <p>Sign in to access your saved itineraries</p>
+                </div>
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder=" " required>
+                        <label for="email">Email Address</label>
+                        <span class="error-message" id="emailError">Please enter a valid email</span>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" placeholder=" " required minlength="6">
+                        <label for="password">Password</label>
+                        <span class="error-message" id="passwordError">Password must be at least 6 characters</span>
+                    </div>
+                    <button type="submit" class="btn-login">
+                        <i class="fas fa-sign-in-alt"></i> Sign In
+                    </button>
+                </form>
+            </div>
+            <div class="welcome-message" id="welcomeMessage">
+                <i class="fas fa-check-circle"></i>
+                <h3>Welcome to SL Guide!</h3>
+                <p>You have successfully logged in. Start exploring Sri Lanka!</p>
+                <button class="btn-primary" onclick="logout()" style="margin-top: 1rem;">Logout</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact/Footer Section -->
+    <footer id="contact">
+        <div class="footer-content">
+            <h3>Contact Us</h3>
+            <p>Email: info@slguide.com | Phone: +94 11 234 5678</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p>&copy; 2024 SL Guide. All rights reserved.</p>
+            <p class="footer-message">Visit Sri Lanka - The Pearl of the Indian Ocean</p>
+        </div>
+    </footer>
+
+    <!-- Place Details Modal -->
+    <div class="modal" id="placeModal">
+        <div class="modal-content">
+            <div class="modal-header" id="modalHeader">
+                <button class="close-modal" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+                <h2 class="modal-title" id="modalTitle">Place Name</h2>
+            </div>
+            <div class="modal-body">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <h4><i class="fas fa-clock"></i> Best Time</h4>
+                        <p id="modalBestTime">Information</p>
+                    </div>
+                    <div class="info-item">
+                        <h4><i class="fas fa-ticket-alt"></i> Entry Fee</h4>
+                        <p id="modalEntryFee">Information</p>
+                    </div>
+                    <div class="info-item">
+                        <h4><i class="fas fa-car"></i> Travel Time</h4>
+                        <p id="modalTravelTime">Information</p>
+                    </div>
+                    <div class="info-item">
+                        <h4><i class="fas fa-shield-alt"></i> Safety</h4>
+                        <p id="modalSafety">Information</p>
+                    </div>
+                </div>
+                
+                <h3 style="color: var(--ocean-blue); margin-bottom: 1rem;">Nearby Hotels</h3>
+                <div id="modalHotels" style="display: grid; gap: 1rem;">
+                    <!-- Hotels will be inserted here -->
+                </div>
+
+                <div class="tips-section">
+                    <h4><i class="fas fa-lightbulb"></i> Travel Tips</h4>
+                    <ul class="tips-list" id="modalTips">
+                        <!-- Tips will be inserted here -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Places Data
+        const places = [
+            {
+                id: 1,
+                name: "Sigiriya",
+                description: "Ancient rock fortress and palace ruins with stunning frescoes and panoramic views.",
+                distance: 169,
+                image: "https://images.unsplash.com/photo-1586613833466-283655a5951c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                bestTime: "January to April",
+                entryFee: "$30 (USD) for foreigners",
+                travelTime: "4 hours from Colombo",
+                safety: "Moderate - steep climbs, avoid during rain",
+                hotels: ["Heritage Kandalama", "Sigiriya Village", "Cinnamon Lodge"],
+                tips: ["Start early morning to avoid heat", "Wear comfortable shoes", "Bring water", "Hire a guide for history"]
+            },
+            {
+                id: 2,
+                name: "Ella",
+                description: "Picturesque hill country town famous for tea plantations, hiking trails, and Nine Arch Bridge.",
+                distance: 205,
+                image: "https://images.unsplash.com/photo-1562696271-058800d6bf45?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                bestTime: "December to March",
+                entryFee: "Free (activities vary)",
+                travelTime: "6 hours by train/scenic route",
+                safety: "High - safe for solo travelers",
+                hotels: ["98 Acres Resort", "Ella Jungle Resort", "The Secret Ella"],
+                tips: ["Take the train from Kandy for views", "Visit Little Adam's Peak", "Try local tea", "Book trains in advance"]
+            },
+            {
+                id: 3,
+                name: "Kandy",
+                description: "Cultural capital home to the Temple of the Sacred Tooth Relic and beautiful botanical gardens.",
+                distance: 115,
+                image: "https://images.unsplash.com/photo-1588258525935-3e5c8e5f6c9a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                bestTime: "December to April",
+                entryFee: "$10 for Temple, $15 for Gardens",
+                travelTime: "3 hours from Colombo",
+                safety: "High - very tourist friendly",
+                hotels: ["Earl's Regency", "Mahaweli Reach", "Cinnamon Citadel"],
+                tips: ["Dress modestly for temple", "See the evening ceremony", "Walk around Kandy Lake", "Visit Peradeniya Gardens"]
+            },
+            {
+                id: 4,
+                name: "Mirissa",
+                description: "Stunning beach town known for whale watching, surfing, and vibrant nightlife.",
+                distance: 150,
+                image: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                bestTime: "November to April",
+                entryFee: "Free (whale watching $40-60)",
+                travelTime: "2.5 hours from Colombo",
+                safety: "High - standard beach safety",
+                hotels: ["Cape Weligama", "Paradise Beach Club", "Mandara Resort"],
+                tips: ["Book whale watching early", "Visit Secret Beach", "Try fresh seafood", "Sunset at Coconut Tree Hill"]
+            },
+            {
+                id: 5,
+                name: "Nuwara Eliya",
+                description: "Little England of Sri Lanka with colonial architecture, cool climate, and tea estates.",
+                distance: 180,
+                image: "https://images.unsplash.com/photo-1586613833466-283655a5951c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                bestTime: "February to April",
+                entryFee: "Varies by attraction",
+                travelTime: "5 hours from Colombo",
+                safety: "High - very safe",
+                hotels: ["The Grand Hotel", "Heritance Tea Factory", "Jetwing St. Andrew's"],
+                tips: ["Bring warm clothes", "Visit a tea factory", "See Horton Plains early", "Try strawberry desserts"]
+            },
+            {
+                id: 6,
+                name: "Yala National Park",
+                description: "Famous wildlife sanctuary with leopards, elephants, and diverse bird species.",
+                distance: 300,
+                image: "https://images.unsplash.com/photo-1564769625905-50e93615e769?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                bestTime: "February to July",
+                entryFee: "$15 + jeep safari costs",
+                travelTime: "5 hours from Colombo",
+                safety: "Medium - follow guide instructions",
+                hotels: ["Cinnamon Wild", "Jetwing Yala", "Chaaya Wild"],
+                tips: ["Book safari in advance", "Morning safaris best for leopards", "Wear neutral colors", "Bring binoculars"]
+            }
+        ];
+
+        // Initialize
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1000);
+            
+            renderPlaces();
+            setupScrollAnimation();
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        function closeMenu() {
+            document.getElementById('navLinks').classList.remove('active');
+        }
+
+        // Render Places
+        function renderPlaces() {
+            const grid = document.getElementById('placesGrid');
+            grid.innerHTML = places.map(place => `
+                <div class="place-card" data-id="${place.id}">
+                    <div class="place-image" style="background-image: url('${place.image}')">
+                        <div class="place-overlay">
+                            <h3 class="place-name">${place.name}</h3>
+                        </div>
+                    </div>
+                    <div class="place-content">
+                        <p class="place-description">${place.description}</p>
+                        <div class="place-meta">
+                            <span class="distance">
+                                <i class="fas fa-map-marker-alt"></i>
+                                ${place.distance} km from Colombo
+                            </span>
+                        </div>
+                        <a href="#map" class="btn-map" onclick="focusMap('${place.name}', ${place.distance})">
+                            <i class="fas fa-map"></i> View on Map
+                        </a>
+                        <button class="btn-details" onclick="openModal(${place.id})">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Scroll Animation
+        function setupScrollAnimation() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.place-card').forEach(card => {
+                observer.observe(card);
+            });
+        }
+
+        // Modal Functions
+        function openModal(placeId) {
+            const place = places.find(p => p.id === placeId);
+            if (!place) return;
+
+            document.getElementById('modalHeader').style.backgroundImage = `url('${place.image}')`;
+            document.getElementById('modalTitle').textContent = place.name;
+            document.getElementById('modalBestTime').textContent = place.bestTime;
+            document.getElementById('modalEntryFee').textContent = place.entryFee;
+            document.getElementById('modalTravelTime').textContent = place.travelTime;
+            document.getElementById('modalSafety').textContent = place.safety;
+
+            // Hotels
+            const hotelsHtml = place.hotels.map(hotel => `
+                <div style="padding: 1rem; background: #f8f9fa; border-radius: 10px; display: flex; align-items: center; gap: 1rem;">
+                    <i class="fas fa-hotel" style="color: var(--sunset-orange);"></i>
+                    <span>${hotel}</span>
+                </div>
+            `).join('');
+            document.getElementById('modalHotels').innerHTML = hotelsHtml;
+
+            // Tips
+            const tipsHtml = place.tips.map(tip => `<li>${tip}</li>`).join('');
+            document.getElementById('modalTips').innerHTML = tipsHtml;
+
+            document.getElementById('placeModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('placeModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on outside click
+        document.getElementById('placeModal').addEventListener('click', (e) => {
+            if (e.target.id === 'placeModal') closeModal();
+        });
+
+        // Map Functions
+        function focusMap(placeName, distance) {
+            const panel = document.getElementById('mapInfoPanel');
+            document.getElementById('panelTitle').textContent = placeName;
+            document.getElementById('panelDescription').textContent = `Explore ${placeName}, one of Sri Lanka's top destinations.`;
+            document.getElementById('panelDistance').textContent = `${distance} km`;
+            
+            const tips = [
+                "Check road conditions before traveling",
+                "Hire a private driver for comfort",
+                "Start early to avoid traffic"
+            ];
+            document.getElementById('panelTip').textContent = tips[Math.floor(Math.random() * tips.length)];
+            
+            panel.classList.add('active');
+            
+            // Smooth scroll to map
+            document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function closeMapPanel() {
+            document.getElementById('mapInfoPanel').classList.remove('active');
+        }
+
+        // Login Functions
+        function handleLogin(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email');
+            const password = document.getElementById('password');
+            let isValid = true;
+
+            // Reset errors
+            document.getElementById('emailError').style.display = 'none';
+            document.getElementById('passwordError').style.display = 'none';
+
+            // Validate email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email.value)) {
+                document.getElementById('emailError').style.display = 'block';
+                isValid = false;
+            }
+
+            // Validate password
+            if (password.value.length < 6) {
+                document.getElementById('passwordError').style.display = 'block';
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Simulate login
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('welcomeMessage').style.display = 'block';
+                
+                // Store login state
+                localStorage.setItem('slGuideLoggedIn', 'true');
+            }
+        }
+
+        function logout() {
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('welcomeMessage').style.display = 'none';
+            document.getElementById('email').value = '';
+            document.getElementById('password').value = '';
+            localStorage.removeItem('slGuideLoggedIn');
+        }
+
+        // Check login state on load
+        if (localStorage.getItem('slGuideLoggedIn') === 'true') {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('welcomeMessage').style.display = 'block';
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
